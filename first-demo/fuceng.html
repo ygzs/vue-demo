@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <link rel="stylesheet" href="./style.css">
+    <title>浮层</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        let view = new Vue({
+            el:'#app',
+            data:{
+               flag:false
+            },
+            template:`
+            <div>
+                <button v-on:click='display' > clicd me </button>
+                <div v-show='flag'> hello world </div>
+            </div>
+            `,
+            methods:{
+                display(){
+                    this.flag = !this.flag
+                }
+            }
+        })
+    </script>
+</body>
+</html>

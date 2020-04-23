@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <style>
+        ol{
+            list-style: none;
+            cursor: pointer;
+        }
+        .active{
+            background: red;
+        }
+    </style>
+    <title>浮层</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        let view = new Vue({
+            el:'#app',
+            data:{
+                selected:1,
+                tags:[
+                   {name:1,value:'a'},
+                   {name:2,value:'b'},
+                   {name:3,value:'c'},
+               ]
+            },
+            template:`
+            <div>
+                <ol class="xx">
+                    <li v-for='tag in tags' 
+                    v-on:click="selected=tag.name"
+                    v-bind:class='{active:selected===tag.name}'>
+                    {{ tag.name }}</li>
+                </ol>
+                <ol>
+                    <li v-for='tag in tags'
+                    v-show='tag.name===selected'> 
+                    {{ tag.value }}</li>
+                </ol>
+            </div>
+            `,
+            methods:{}
+        })
+    </script>
+</body>
+</html>

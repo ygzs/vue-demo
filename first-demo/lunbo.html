@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .window{
+            height: 300px;
+            width: 400px;
+            overflow: hidden;
+        }
+        .slide{
+            display: flex;
+            transition: all 1s;
+        }
+    </style>
+    <title>浮层</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+
+    <script>
+        let view = new Vue({
+            el:'#app',
+            data:{
+                transformValue: '',
+                source:['./img/1.png',['./img/2.png'],['./img/3.png']]
+            },
+            template:`
+            <div>
+                <div class="window">
+                    <div class="slide"
+                    v-bind:style='{transform:transformValue}'>
+                        <img v-for='src in source' v-bind:src='src'>
+                    </div>
+                </div>
+                <button v-on:click='goto(0)' >1</button>
+                <button v-on:click='goto(1)' >2</button>
+                <button v-on:click='goto(2)' >3</button>
+            </div>
+            `,
+            methods:{
+                goto(index){
+                    this.transformValue = `translateX(${-400*index}px)`
+                }
+            }
+        })
+    </script>
+</body>
+</html>
