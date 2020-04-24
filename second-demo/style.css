@@ -1,0 +1,52 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#app{
+    margin-top: 5px;
+}
+table{
+    padding: 10px 80px;
+}
+table td{
+    padding: 7px 50px;
+    text-align: center;
+}
+table button{
+    padding: 5px 4px;
+}
+.controller{
+    width: 757px;
+    margin: 0px auto;
+}
+.controller>h3{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.list{
+    margin-top: 20px;
+}
+.row{
+    display: flex;
+    flex-direction: column;
+    margin: 15px 30px;
+}
+.row>span{
+    text-align: center;
+    margin-bottom: 5px;
+}
+.row>input{
+    height: 35px;
+}
+.row .submit{
+    background-color: salmon;
+    margin: 20px 60px;
+    border: none;
+}
