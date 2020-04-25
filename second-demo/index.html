@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script>
-    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
@@ -38,71 +37,29 @@
                 <tr><td>总价 {{amounts}}</td></tr>
             </tfoot>
         </table>
-    </div>
-    <div class="controller">
-        <h3>添加书籍</h3>
-        <hr>
-        <form class="list"  v-on:submit.prevent="addBook">
-            <div class="row">
-                <span>书名</span>
-                <input type="text" name="name" v-model='book.name' >
-            </div>
-            <div class="row">
-                <span>作者</span>
-                <input type="text" name="author" v-model='book.author' >
-            </div>
-            <div class="row">
-                <span>价格</span>
-                <input type="text" name="price" v-model='book.price' >
-            </div>
-            <div class="row">
-                <input type="submit" value="添加" class="submit">
-            </div>
-        </form>
+        <div class="controller">
+            <h3>添加书籍</h3>
+            <hr>
+            <form class="list" v-on:submit.prevent='addBook'>
+                <div class="row">
+                    <span>书名</span>
+                    <input type="text" name="name" v-model='book.name' >
+                </div>
+                <div class="row">
+                    <span>作者</span>
+                    <input type="text" name="author" v-model='book.author' >
+                </div>
+                <div class="row">
+                    <span>价格</span>
+                    <input type="text" name="price" v-model='book.price' >
+                </div>
+                <div class="row">
+                    <input type="submit" value="添加" class="submit">
+                </div>
+            </form>
+        </div>
     </div>
 
-    <script>
-        let view = new Vue({
-            el:'#app',
-            data:{
-                books:[
-                    {number:'1',name:'西游记',author:'吴承恩',price:'23'},
-                    {number:'2',name:'水浒传',author:'施耐庵',price:'24'},
-                    {number:'3',name:'三国演义',author:'罗贯中',price:'25'},
-                    {number:'4',name:'红楼梦',author:'曹雪芹',price:'26'},
-                ],
-                book:{
-                number:0,
-                name:'',
-                author:'',
-                price:'',
-                },
-            },
-            computed:{
-                amounts:function(){
-                    let sum = 0
-                    for (let index = 0; index < this.books.length; index++) {
-                        sum += this.books[index].price-0
-                    }
-                    return sum
-                }
-            },
-            methods:{
-                deleteBook(index){
-                    this.books.splice(index,1)
-                    console.log(this.books);
-                },
-                addBook(){
-                    console.log(1);
-                    
-                    this.book.number = this.books.length +1
-                    console.log(this.book);
-                    
-                    this.books.push(this.book)
-                    this.book = ''
-                }
-            }
-        })
-    </script>
+    <script src="./main.js"></script>
 </body>
 </html>
