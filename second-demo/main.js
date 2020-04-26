@@ -4,15 +4,23 @@ let preBooks = [
     {number:'3',name:'三国演义',author:'罗贯中',price:'25'},
     {number:'4',name:'红楼梦',author:'曹雪芹',price:'26'},
 ]
+Mock.mock('/', 'get', () => {
+  return preBooks
+})
+Mock.mock('/', 'post', (data) => {
+    let info= JSON.parse(data.body)
+    return  info
+})
 axios.interceptors.response.use(function (response) {
     let config = response.config
     let {url,method,data} = config
     if(url==='/'&& method==='get'){
-        data = preBooks
+        data = response.data
     }
-    else if(url==='/'&& method==='put'){
-        this.preBooks.splice(data,1)
-        data = preBooks
+    else if(url==='/'&& method==='post'){
+        data = response.data
+        preBooks.push(data)
+        data = preBooks 
     }
     return data
 })
@@ -26,7 +34,7 @@ let model = {
         })
     },
     update(obj){
-        return axios.post('/',obj).then(()=>{
+        return axios.post('/',obj).then((data)=>{
             this.data = data
             return data
         })
@@ -36,12 +44,7 @@ let model = {
 let view = new Vue({
     el:'#app',
     data:{
-        books:[
-            //{number:'1',name:'西游记',author:'吴承恩',price:'23'},
-            //{number:'2',name:'水浒传',author:'施耐庵',price:'24'},
-            //{number:'3',name:'三国演义',author:'罗贯中',price:'25'},
-            //{number:'4',name:'红楼梦',author:'曹雪芹',price:'26'},
-        ],
+        books:[],
          book:{
             number:0,
             name:'',
@@ -52,7 +55,7 @@ let view = new Vue({
     created(){
         model.fetch().then(()=>{
             this.books = model.data
-        })
+        })  
     },
     computed:{
         amounts:function(){
@@ -66,14 +69,12 @@ let view = new Vue({
     methods:{
         deleteBook(index){
             this.books.splice(index,1)
-            //let obj = {num:index}
-            //model.update(obj).then(()=>{
-            //    this.books = model.data
-            //})
         },
         addBook(){
             this.book.number = this.books.length +1
-            this.books.push(this.book)
+            model.update(this.book).then(()=>{
+                this.books = model.data
+            })
             this.book={}
         }
     }
